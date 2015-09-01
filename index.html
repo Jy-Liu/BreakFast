@@ -288,16 +288,12 @@
 			</div>
 
 			<div id="fl_menu">
-			    <div class="label"> 1P </div>
-			    <div class="menu">
-				<a href="#" class="menu_item">A</a>
-				<a href="#" class="menu_item">B</a>
-				<a href="#" class="menu_item">C</a>
-				<a href="#" class="menu_item">D</a>
-				<a href="#" class="menu_item">E</a>
-				<a href="#" class="menu_item">F</a>
-				<a href="#" class="menu_item">G</a>
-				<a href="#" class="menu_item">H</a>
+			    <div class="switch_person_label"> &nbsp; </div>
+			    <div class="switch_person_menu">
+				<a href="#" class="switch_person_item" id="green" style="background-color:green;"> &nbsp;</a>
+				<a href="#" class="switch_person_item" id="yellow" style="background-color:yellow;">&nbsp;</a>
+				<a href="#" class="switch_person_item" id="blue" style="background-color:blue;">  &nbsp;</a>
+				<a href="#" class="switch_person_item" id="red" style="background-color:red;">   &nbsp;</a>
 			    </div>
 			</div>			
 			
@@ -320,8 +316,8 @@
 			 
 			//cache vars
 			$fl_menu=$("#fl_menu");
-			$fl_menu_menu=$("#fl_menu .menu");
-			$fl_menu_label=$("#fl_menu .label");
+			$fl_menu_menu=$("#fl_menu .switch_person_menu");
+			$fl_menu_label=$("#fl_menu .switch_person_label");
 			 
 			$(window).load(function() {
 			    menuPosition=$('#fl_menu').position().top;
@@ -351,6 +347,17 @@
 				$fl_menu.stop().animate({top: newPosition}, $float_speed, $float_easing);
 			    }
 			}
+			
+			/*$( "a.switch_person_item").load(function(){
+				$(this).css('background-color',$(this).attr("id"));
+			});*/
+			
+			$( "a.switch_person_item").click(function(){
+				//alert($(this).attr("id"));
+				$("div.switch_person_label").css('background-color',$(this).attr("id"));
+				return false;
+			});
+
 			</script>	
 
 	</body>
