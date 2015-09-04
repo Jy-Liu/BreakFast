@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<title>Prologue by HTML5 UP</title>
-		
+
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -16,7 +16,7 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 
 		<!-- Floating Menu -->
-		
+
 
 	</head>
 
@@ -50,7 +50,7 @@
 
 							-->
 							<ul>
-								<!-- <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li> -->
+								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">首頁</span></a></li>
 								<li><a href="#toast" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">烤土司</span></a></li>
 								<li><a href="#hamburger" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">漢堡</span></a></li>
 								<li><a href="#drink" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">飲料</span></a></li>
@@ -80,22 +80,29 @@
 			<div id="main">
 
 				<!-- Intro -->
-<!-- 					<section id="top" class="one dark cover">
+					<section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2>歡迎使用早餐訂餐系統</h2>
+								<h2>請先填寫桌號以及人數再行點餐，謝謝</h2>
 							</header>
 
+							<form method="post" action="#">
+								<div class="row">
+									<div class="3u 3u(mobile)"><input type="hidden" name="hidden_1" /></div>
+									<div class="3u 3u(mobile)" id="input"><input id="input" type="text" name="deskNum" placeholder="桌號" maxlength="3" /></div>
+									<div class="3u 3u$(mobile)"><input id="input" type="text" name="peopleNum" placeholder="人數" maxlength="3" /></div>
+									<div class="3u$ 3u$(mobile)"><input type="hidden" name="hidden_2" /></div>
+								</div>
+							</form>
+
 							<footer>
-								<a href="#portfolio" class="button scrolly">Magna Aliquam</a>
+								<a href="#toast" class="button scrolly">去點餐囉</a>
 							</footer>
 
 						</div>
-					</section> -->
+					</section>
 
 				<!-- Portfolio -->
 					<section id="toast" class="two">
@@ -295,8 +302,8 @@
 				<a href="#" class="switch_person_item" id="blue" style="background-color:blue;">  &nbsp;</a>
 				<a href="#" class="switch_person_item" id="red" style="background-color:red;">   &nbsp;</a>
 			    </div>
-			</div>			
-			
+			</div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -306,19 +313,19 @@
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/jquery.easing.1.3.js" type="text/javascript"></script>
-			
+
 			<script>
 			//config
 			$float_speed=1500; //milliseconds
 			$float_easing="easeOutQuint";
 			$menu_fade_speed=500; //milliseconds
 			$closed_menu_opacity=0.75;
-			 
+
 			//cache vars
 			$fl_menu=$("#fl_menu");
 			$fl_menu_menu=$("#fl_menu .switch_person_menu");
 			$fl_menu_label=$("#fl_menu .switch_person_label");
-			 
+
 			$(window).load(function() {
 			    menuPosition=$('#fl_menu').position().top;
 			    FloatMenu();
@@ -333,11 +340,11 @@
 				}
 			    );
 			});
-			 
+
 			$(window).scroll(function () {
 			    FloatMenu();
 			});
-			 
+
 			function FloatMenu(){
 			    var scrollAmount=$(document).scrollTop();
 			    var newPosition=menuPosition+scrollAmount;
@@ -347,18 +354,18 @@
 				$fl_menu.stop().animate({top: newPosition}, $float_speed, $float_easing);
 			    }
 			}
-			
+
 			/*$( "a.switch_person_item").load(function(){
 				$(this).css('background-color',$(this).attr("id"));
 			});*/
-			
+
 			$( "a.switch_person_item").click(function(){
 				//alert($(this).attr("id"));
 				$("div.switch_person_label").css('background-color',$(this).attr("id"));
 				return false;
 			});
 
-			</script>	
+			</script>
 
 	</body>
 </html>
