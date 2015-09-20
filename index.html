@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Prologue by HTML5 UP</title>
+		<title>BREAKFAST</title>
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -111,26 +111,61 @@
 						<header><h3>烤土司</h3></header>
 
 							<div class="row">
-								<div class="4u 12u$(mobile)">
+								<div class="3u 12u(mobile)">
 									<div>
-										<a onclick="alert('egg')">煎蛋 20</a>
-										<a onclick="alert('cheese')">加起士30</a>
+										<div class="item">煎蛋20</div>
+										<div class="item">加起士30</div>
 									</div>
-									<div>起士蛋</div>
-									<div>蔬菜蛋</div>
-									<div>火腿蛋</div>
+									<div>
+										<div class="item">起士蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">蔬菜蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
 								</div>
-								<div class="4u 12u$(mobile)">
-									<div>玉米蛋</div>
-									<div>鮪魚蛋</div>
-									<div>培根蛋</div>
-									<div>肉鬆蛋</div>
+								<div class="3u 12u$(mobile)">
+									<div>
+										<div class="item">玉米蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">培根蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">肉鬆蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
 								</div>
-								<div class="4u$ 12u$(mobile)">
-									<div>肉排蛋</div>
-									<div>里肌蛋</div>
-									<div>香雞蛋</div>
-									<div>烤總匯</div>
+								<div class="3u 12u(mobile)">
+									<div>
+										<div class="item">肉排蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">里肌蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">香雞蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+								</div>
+								<div class="3u$ 12u$(mobile)">
+									<div>
+										<div class="item">火腿蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">鮪魚蛋20</div>
+										<div class="item">加起士30</div>
+									</div>
+									<div>
+										<div class="item">烤總匯20</div>
+										<div class="item">加起士30</div>
+									</div>
 								</div>
 							</div>
 
@@ -304,6 +339,12 @@
 			    </div>
 			</div>
 
+			<!-- Cart -->
+			<div id="cart">
+				<div id="close-cart-window">&nbsp;</div>
+				<div id="cart-window-content"></div>
+			</div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -316,7 +357,7 @@
 
 			<script>
 			//config
-			$float_speed=1500; //milliseconds
+			$float_speed=1000; //milliseconds
 			$float_easing="easeOutQuint";
 			$menu_fade_speed=500; //milliseconds
 			$closed_menu_opacity=0.75;
@@ -325,20 +366,34 @@
 			$fl_menu=$("#fl_menu");
 			$fl_menu_menu=$("#fl_menu .switch_person_menu");
 			$fl_menu_label=$("#fl_menu .switch_person_label");
+			$cart = $('#cart');
+
+			$(document).ready(function () {
+				$('#close-cart-window').click(function() {
+		    	$cart.css('display', 'none');
+		    });
+
+		    $('.item').click(function () {
+		    	$('#cart-window-content').html($('#cart-window-content').html()+"<div>"+$(this).html()+"</div>");
+		    });
+			});
 
 			$(window).load(function() {
-			    menuPosition=$('#fl_menu').position().top;
-			    FloatMenu();
-			    $fl_menu.hover(
-				function(){ //mouse over
-				    $fl_menu_label.fadeTo($menu_fade_speed, 1);
-				    $fl_menu_menu.fadeIn($menu_fade_speed);
-				},
-				function(){ //mouse out
-				    $fl_menu_label.fadeTo($menu_fade_speed, $closed_menu_opacity);
-				    $fl_menu_menu.fadeOut($menu_fade_speed);
-				}
-			    );
+		    menuPosition=$('#fl_menu').position().top;
+		    FloatMenu();
+		    $fl_menu.hover(
+					function(){ //mouse over
+					    $fl_menu_label.fadeTo($menu_fade_speed, 1);
+					    $fl_menu_menu.fadeIn($menu_fade_speed);
+					},
+					function(){ //mouse out
+					    $fl_menu_label.fadeTo($menu_fade_speed, $closed_menu_opacity);
+					    $fl_menu_menu.fadeOut($menu_fade_speed);
+					});
+		    $fl_menu.dblclick(function() {
+		    	$cart.css('display', 'block');
+		    });
+
 			});
 
 			$(window).scroll(function () {
@@ -362,6 +417,7 @@
 			$( "a.switch_person_item").click(function(){
 				//alert($(this).attr("id"));
 				$("div.switch_person_label").css('background-color',$(this).attr("id"));
+			  $cart.css('background-color', $(this).attr('id'));
 				return false;
 			});
 
