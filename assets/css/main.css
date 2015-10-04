@@ -8,11 +8,41 @@
 */
 
 /* Martinet: Floating Menu*/
-#fl_menu{position:absolute; top:50px; left:90%; z-index:9999; width:60px; height:50px;}
-#fl_menu .switch_person_label{padding-left:20px; line-height:50px; font-family:"Arial Black", Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold; background:#000; color:#fff; letter-spacing:7px;}
-#fl_menu .switch_person_menu{display:none;}
-#fl_menu .switch_person_menu .switch_person_item{display:block; background:#000; color:#bbb; border-top:1px solid #333; padding:10px 20px; font-family:Arial, Helvetica, sans-serif; font-size:12px; text-decoration:none;}
-#fl_menu .switch_person_menu a.switch_person_item:hover{background:#333; color:#fff;}
+#fl_menu{
+	position:absolute;
+	top:10px;
+	right:10px;
+	z-index:9999;
+	width:60px;
+	height:50px;
+}
+#fl_menu .switch_person_label{
+	padding-left:20px;
+	line-height:50px;
+	font-family:"Arial Black", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	background: #000;
+	color:#fff;
+	letter-spacing:7px;
+}
+#fl_menu .switch_person_menu{
+	display:none;
+}
+#fl_menu .switch_person_menu .switch_person_item{
+	display:block;
+	background:#000;
+	color:#bbb;
+	border-top:1px solid #333;
+	padding:10px 20px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	text-decoration:none;
+}
+#fl_menu .switch_person_menu a.switch_person_item:hover{
+	background:#333;
+	color:#fff;
+}
 
 /* Orb: Specification*/
 .item {
@@ -66,6 +96,16 @@
 				text-align: left;
 				color: #fff;
 			}
+
+#button {
+	margin: 0 50px 20px 50px;
+
+	color: #fff;
+	background-color: #8ebebc;
+	border-radius: 5px;
+
+	text-align: center;
+}
 
 /* Reset */
 
@@ -1959,7 +1999,7 @@
 	.button {
 		position: relative;
 		display: inline-block;
-		border-radius: 0.35em;
+		border-radius: 0.50em;
 		color: #fff !important;
 		text-decoration: none;
 		padding: 0.75em 2.5em 0.75em 2.5em;

@@ -343,6 +343,7 @@
 			<div id="cart">
 				<div id="close-cart-window">&nbsp;</div>
 				<div id="cart-window-content"></div>
+				<div id="button">去結帳囉～</div>
 			</div>
 
 		<!-- Scripts -->
@@ -374,7 +375,14 @@
 		    });
 
 		    $('.item').click(function () {
-		    	$('#cart-window-content').html($('#cart-window-content').html()+"<div>"+$(this).html()+"</div>");
+		    	$('#cart-window-content').html($('#cart-window-content').html()+"<div style='padding: 0 auto'>"+$(this).html()+"</div>");
+		    });
+
+		    $('#button').on('mousedown', function() {
+		    	$(this).css('background-color', '#fff');
+		    });
+		    $('#button').on('mouseup', function() {
+		    	$(this).css('background-color', '#8ebebc');
 		    });
 			});
 
