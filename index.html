@@ -91,20 +91,21 @@
 							<form method="post" action="#">
 								<div class="row">
 									<div class="3u 3u(mobile)"><input type="hidden" name="hidden_1" /></div>
-									<div class="3u 3u(mobile)" id="input"><input id="input" type="text" name="deskNum" placeholder="桌號" maxlength="3" /></div>
-									<div class="3u 3u$(mobile)"><input id="input" type="text" name="peopleNum" placeholder="人數" maxlength="3" /></div>
+									<div class="3u 3u(mobile)"><input id="deskNum" type="text" name="deskNum" placeholder="桌號" maxlength="3" /></div>
+									<div class="3u 3u$(mobile)"><input id="peopleNum" type="text" name="peopleNum" placeholder="人數" maxlength="3" /></div>
 									<div class="3u$ 3u$(mobile)"><input type="hidden" name="hidden_2" /></div>
 								</div>
 							</form>
 
 							<footer>
-								<a href="#toast" class="button scrolly">去點餐囉</a>
+								<a href="#toast" class="button scrolly" id="start_order">去點餐囉</a>
 							</footer>
 
 						</div>
 					</section>
 
 				<!-- Portfolio -->
+				<div id="menu">
 					<section id="toast" class="two">
 						<div class="container">
 
@@ -290,7 +291,7 @@
 
 						</div>
 					</section> -->
-
+				</div>
 				<!-- Contact -->
 					<section id="contact" class="four">
 						<div class="container">
@@ -318,7 +319,6 @@
 					</section>
 
 			</div>
-			<img src="./images/noun_16661_cc.png" height="20px" width="auto" class="deleteItem" id="test"/>
 
 		<!-- Footer -->
 			<div id="footer">
@@ -331,18 +331,27 @@
 			</div>
 
 			<div id="fl_menu">
-			    <div class="switch_person_label"> &nbsp; </div>
-			    <div class="switch_person_menu">
+			    <div class="switch_person_label"> Cart </div>
+			    <!-- <div class="switch_person_menu">
 				<a href="#" class="switch_person_item" id="green" style="background-color:green;"> &nbsp;</a>
 				<a href="#" class="switch_person_item" id="yellow" style="background-color:yellow;">&nbsp;</a>
 				<a href="#" class="switch_person_item" id="blue" style="background-color:blue;">  &nbsp;</a>
 				<a href="#" class="switch_person_item" id="red" style="background-color:red;">   &nbsp;</a>
-			    </div>
+			    </div> -->
 			</div>
 
 			<!-- Cart -->
 			<div id="cart">
 				<div id="close-cart-window">&nbsp;</div>
+				<div class="switch_person_menu">
+					<!-- https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10 -->
+					<!--
+					<a href="#" class="switch_person_item" id="person1" style="background-color:#1f77b4;"> &nbsp;</a>
+					<a href="#" class="switch_person_item" id="person2" style="background-color:#ff7f0e;">&nbsp;</a>
+					<a href="#" class="switch_person_item" id="person3" style="background-color:#2ca02c;">  &nbsp;</a>
+					<a href="#" class="switch_person_item" id="person4" style="background-color:#d62728;">   &nbsp;</a>
+					-->
+				</div>
 				<div id="cart-window-content"></div>
 				<div id="button">去結帳囉～</div>
 			</div>
@@ -363,10 +372,10 @@
 
 			<script>
 			//config
-			$float_speed=1000; //milliseconds
+			/*$float_speed=1000; //milliseconds
 			$float_easing="easeOutQuint";
 			$menu_fade_speed=500; //milliseconds
-			$closed_menu_opacity=0.75;
+			$closed_menu_opacity=0.75;*/
 
 			//cache vars
 			$fl_menu=$("#fl_menu");
@@ -377,6 +386,25 @@
 			$(document).ready(function () {
 				$('#close-cart-window').click(function() {
 		    	$cart.css('display', 'none');
+		    });
+
+		    $('#start_order').click(function() {
+		    	$('#menu').css('display', 'block');
+
+		    	$('#cart .switch_person_menu').html(' ');
+
+		    	var pnum = $('#peopleNum').val();
+
+		    	var pchoice = ["#1f77b4" ,"#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+
+		    	for(i = 0 ; i < pnum ; i ++){
+						$('#cart .switch_person_menu').html($('#cart .switch_person_menu').html()+'<a href="#" class="switch_person_item" id="person'+i+'" style="background-color:'+pchoice[i]+';"> &nbsp;</a>');
+					}
+
+					for(i = 0 ; i < pnum ; i ++){
+						var pstr = "#person"+i.toString();
+						$(pstr).data("person_id",i);
+					}
 		    });
 
 		    $('.item').click(function () {
@@ -403,9 +431,23 @@
 		    });
 			});
 
+			// Switch Person generate
+			/*
+			1f77b4 #1f77b4
+			ff7f0e #ff7f0e
+			2ca02c #2ca02c
+			d62728 #d62728
+			9467bd #9467bd
+			8c564b #8c564b
+			e377c2 #e377c2
+			7f7f7f #7f7f7f
+			bcbd22 #bcbd22
+			17becf #17becf
+			*/
+
 			$(window).load(function() {
 		    menuPosition=$('#fl_menu').position().top;
-		    FloatMenu();
+		    /*FloatMenu();
 		    $fl_menu.hover(
 					function(){ //mouse over
 					    $fl_menu_label.fadeTo($menu_fade_speed, 1);
@@ -414,18 +456,18 @@
 					function(){ //mouse out
 					    $fl_menu_label.fadeTo($menu_fade_speed, $closed_menu_opacity);
 					    $fl_menu_menu.fadeOut($menu_fade_speed);
-					});
-		    $fl_menu.dblclick(function() {
+					});*/
+		    $fl_menu.click(function() {
 		    	$cart.css('display', 'block');
 		    });
 
 			});
 
-			$(window).scroll(function () {
+			/*$(window).scroll(function () {
 			    FloatMenu();
-			});
+			});*/
 
-			function FloatMenu(){
+			/*function FloatMenu(){
 			    var scrollAmount=$(document).scrollTop();
 			    var newPosition=menuPosition+scrollAmount;
 			    if($(window).height()<$fl_menu.height()+$fl_menu_menu.height()){
@@ -433,7 +475,7 @@
 			    } else {
 				$fl_menu.stop().animate({top: newPosition}, $float_speed, $float_easing);
 			    }
-			}
+			}*/
 
 			/*$( "a.switch_person_item").load(function(){
 				$(this).css('background-color',$(this).attr("id"));
@@ -441,8 +483,8 @@
 
 			$( "a.switch_person_item").click(function(){
 				//alert($(this).attr("id"));
-				$("div.switch_person_label").css('background-color',$(this).attr("id"));
-			  $cart.css('background-color', $(this).attr('id'));
+				$("div.switch_person_label").css('background-color',$(this).css("background-color"));
+				$("div.switch_person_label").data( "current_person_id", $(this).data("person_id"));
 				return false;
 			});
 
