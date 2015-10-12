@@ -113,58 +113,58 @@
 							<div class="row">
 								<div class="3u 12u(mobile)">
 									<div>
-										<div class="item">煎蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="0">煎蛋20</div>
+										<div class="item" name="1">加起士30</div>
 									</div>
 									<div>
-										<div class="item">起士蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="2">起士蛋20</div>
+										<div class="item" name="3">加起士30</div>
 									</div>
 									<div>
-										<div class="item">蔬菜蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="4">蔬菜蛋20</div>
+										<div class="item" name="5">加起士30</div>
 									</div>
 								</div>
 								<div class="3u 12u$(mobile)">
 									<div>
-										<div class="item">玉米蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="6">玉米蛋20</div>
+										<div class="item" name="7">加起士30</div>
 									</div>
 									<div>
-										<div class="item">培根蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="8">培根蛋20</div>
+										<div class="item" name="9">加起士30</div>
 									</div>
 									<div>
-										<div class="item">肉鬆蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="10">肉鬆蛋20</div>
+										<div class="item" name="11">加起士30</div>
 									</div>
 								</div>
 								<div class="3u 12u(mobile)">
 									<div>
-										<div class="item">肉排蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="12">肉排蛋20</div>
+										<div class="item" name="13">加起士30</div>
 									</div>
 									<div>
-										<div class="item">里肌蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="14">里肌蛋20</div>
+										<div class="item" name="15">加起士30</div>
 									</div>
 									<div>
-										<div class="item">香雞蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="16">香雞蛋20</div>
+										<div class="item" name="17">加起士30</div>
 									</div>
 								</div>
 								<div class="3u$ 12u$(mobile)">
 									<div>
-										<div class="item">火腿蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="18">火腿蛋20</div>
+										<div class="item" name="19">加起士30</div>
 									</div>
 									<div>
-										<div class="item">鮪魚蛋20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="20">鮪魚蛋20</div>
+										<div class="item" name="21">加起士30</div>
 									</div>
 									<div>
-										<div class="item">烤總匯20</div>
-										<div class="item">加起士30</div>
+										<div class="item" name="22">烤總匯20</div>
+										<div class="item" name="23">加起士30</div>
 									</div>
 								</div>
 							</div>
@@ -318,6 +318,7 @@
 					</section>
 
 			</div>
+			<img src="./images/noun_16661_cc.png" height="20px" width="auto" class="deleteItem" id="test"/>
 
 		<!-- Footer -->
 			<div id="footer">
@@ -345,6 +346,10 @@
 				<div id="cart-window-content"></div>
 				<div id="button">去結帳囉～</div>
 			</div>
+
+			<!-- Hidden Form -->
+			<form action="" method="POST" id="submitForm">
+			</form>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -375,7 +380,19 @@
 		    });
 
 		    $('.item').click(function () {
-		    	$('#cart-window-content').html($('#cart-window-content').html()+"<div style='padding: 0 auto'>"+$(this).html()+"</div>");
+		    	$name = $(this).attr('name');
+		    	$('#cart-window-content').html($('#cart-window-content').html()+'<div style="text-align: center;" class="cartItem" name="'+$name+'">'+$(this).html()+'&nbsp;&nbsp;<img src="./images/noun_16661_cc.png" class="deleteItem" height="20px" width="auto" /></div>');
+
+		    	$('#submitForm').append('<input type="hidden" name="'+$name+'"></input>');
+
+			    $('.deleteItem').click(function() {
+			    	$(this).parent().remove();
+			    	$deleteName = $(this).parent().attr('name');
+			    	$('#submitForm > input').each(function() {
+			    		if($(this).attr('name') === $deleteName)
+			    			$(this).remove();
+			    	});
+			    });
 		    });
 
 		    $('#button').on('mousedown', function() {
