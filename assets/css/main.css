@@ -36,7 +36,7 @@
 #cart .switch_person_menu .switch_person_item{
 	color: #bbb;
 	padding: 10px 20px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	text-decoration: none;
 }
@@ -94,7 +94,7 @@
 
 #cart-window-content{
 				margin: 1em;
-				font-size: 1.5em;
+				font-size: 1.2em;
 				text-align: left;
 				color: #fff;
 			}
@@ -110,7 +110,7 @@
 }
 
 #submitForm {
-	border:1px solid #000;
+	border:0px solid #000;
 }
 
 /* Reset */

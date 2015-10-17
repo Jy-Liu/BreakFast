@@ -383,6 +383,8 @@
 			$fl_menu_label=$("#fl_menu .switch_person_label");
 			$cart = $('#cart');
 
+			var colorChoice = ["#1f77b4" ,"#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+
 			$(document).ready(function () {
 				$('#close-cart-window').click(function() {
 		    	$cart.css('display', 'none');
@@ -395,23 +397,38 @@
 
 		    	var pnum = $('#peopleNum').val();
 
-		    	var pchoice = ["#1f77b4" ,"#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
-
-		    	for(i = 0 ; i < pnum ; i ++){
-						$('#cart .switch_person_menu').html($('#cart .switch_person_menu').html()+'<a href="#" class="switch_person_item" id="person'+i+'" style="background-color:'+pchoice[i]+';"> &nbsp;</a>');
+		    	for(i = 0; i < pnum; i++){
+						$('#cart .switch_person_menu').html($('#cart .switch_person_menu').html()+'<a href="#toast" class="switch_person_item" id="person'+i+'" style="background-color:'+colorChoice[i]+';">&nbsp;</a>');
 					}
 
-					for(i = 0 ; i < pnum ; i ++){
+					for(i = 0; i < pnum; i++){
 						var pstr = "#person"+i.toString();
-						$(pstr).data("person_id",i);
+						$(pstr).data('person_id',i);
 					}
+
+					$('.switch_person_item').click(function() {
+						$('#menu').data('person_id', $(this).data('person_id'));
+						$cart.css('display', 'none');
+						$fl_menu.css('background-color', colorChoice[$(this).data('person_id')]);
+						//alert($(this).offset().top);
+					});
+
+					$cart.css('display', 'block');
 		    });
+
+		    /*$("a .switch_person_item").click(function(){
+					alert("Hello");
+					alert($(this).attr("id"));
+					$("div .switch_person_label").css('background-color', $(this).css("background-color"));
+					$("div .switch_person_label").data( "current_person_id", $(this).data("person_id"));
+					return false;
+				});*/
 
 		    $('.item').click(function () {
 		    	$name = $(this).attr('name');
-		    	$('#cart-window-content').html($('#cart-window-content').html()+'<div style="text-align: center;" class="cartItem" name="'+$name+'">'+$(this).html()+'&nbsp;&nbsp;<img src="./images/noun_16661_cc.png" class="deleteItem" height="20px" width="auto" /></div>');
+		    	$('#cart-window-content').html($('#cart-window-content').html()+'<div style="position:relative; text-align: center;" class="cartItem" name="'+$name+'">'+$(this).html()+'&nbsp;<span style="position:absolute; top:6px; left:0; display:inline-block; background-color:'+colorChoice[$('#menu').data('person_id')]+'; width:25px; height:25px; border-radius:100%;"></span>&nbsp;<img src="./images/noun_16661_cc.png" class="deleteItem" height="20px" width="auto" /></div>');
 
-		    	$('#submitForm').append('<input type="hidden" name="'+$name+'"></input>');
+		    	$('#submitForm').append('<input type="hidden" name="'+$name+'" person_id="'+$('#menu').data('person_id')+'"></input>');
 
 			    $('.deleteItem').click(function() {
 			    	$(this).parent().remove();
@@ -481,12 +498,7 @@
 				$(this).css('background-color',$(this).attr("id"));
 			});*/
 
-			$( "a.switch_person_item").click(function(){
-				//alert($(this).attr("id"));
-				$("div.switch_person_label").css('background-color',$(this).css("background-color"));
-				$("div.switch_person_label").data( "current_person_id", $(this).data("person_id"));
-				return false;
-			});
+
 
 			</script>
 
