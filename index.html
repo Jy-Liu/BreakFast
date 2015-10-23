@@ -113,9 +113,10 @@
 
 							<div class="row">
 								<div class="3u 12u(mobile)">
-									<div>
+									<div data-series="烤土司" data-name="烤土司">
 										<div class="item" name="0">煎蛋20</div>
-										<div class="item" name="1">加起士30</div>
+										<input type="checkbox" class="attribute" value="cheese">加起士
+										<div class="add"></div>
 									</div>
 									<div>
 										<div class="item" name="2">起士蛋20</div>
@@ -342,6 +343,7 @@
 
 			<!-- Cart -->
 			<div id="cart">
+				<div style="font-size: 0.8em">請選擇</div>
 				<div id="close-cart-window">&nbsp;</div>
 				<div class="switch_person_menu">
 					<!-- https://github.com/mbostock/d3/wiki/Ordinal-Scales#category10 -->
@@ -414,6 +416,9 @@
 					});
 
 					$cart.css('display', 'block');
+					$('#menu').data('person_id', 0);
+					$fl_menu.css('background-color', colorChoice[0]);
+
 		    });
 
 		    /*$("a .switch_person_item").click(function(){
@@ -424,24 +429,39 @@
 					return false;
 				});*/
 
-		    $('.item').click(function () {
-		    	$name = $(this).attr('name');
-		    	$('#cart-window-content').html($('#cart-window-content').html()+'<div style="position:relative; text-align: center;" class="cartItem" name="'+$name+'">'+$(this).html()+'&nbsp;<span style="position:absolute; top:6px; left:0; display:inline-block; background-color:'+colorChoice[$('#menu').data('person_id')]+'; width:25px; height:25px; border-radius:100%;"></span>&nbsp;<img src="./images/noun_16661_cc.png" class="deleteItem" height="20px" width="auto" /></div>');
+		    $('.add').click(function () {
+		    	var name = $(this).parent().children(':first').attr('name');
+		    	var data_series = $(this).parent().attr('data-series');
+		    	var data_name = $(this).parent().attr('data-name');
+		    	var addThings = $(this).parent().attr('addThings');
+		    	$('#cart-window-content').html($('#cart-window-content').html()+'<div style="position:relative; text-align: center;" class="cartItem" name="'+name+'">'+$(this).parent().children(':first').html()+'&nbsp;<span style="position:absolute; top:6px; left:0; display:inline-block; background-color:'+colorChoice[$('#menu').data('person_id')]+'; width:25px; height:25px; border-radius:100%;"></span>&nbsp;<img src="./images/noun_16661_cc.png" class="deleteItem" height="20px" width="auto" /></div>');
 
-		    	$('#submitForm').append('<input type="hidden" name="'+$name+'" person_id="'+$('#menu').data('person_id')+'"></input>');
+		    	$('#submitForm').append('<input type="hidden" data-series="'+data_series+'" data-name="'+data_name+'" addThings="'+addThings+'" name="'+name+'" person_id="'+$('#menu').data('person_id')+'"></input>');
 
 			    $('.deleteItem').click(function() {
 			    	$(this).parent().remove();
-			    	$deleteName = $(this).parent().attr('name');
-			    	$('#submitForm > input').each(function() {
-			    		if($(this).attr('name') === $deleteName)
+			    	var deleteName = $(this).parent().attr('name');
+			    	$('#submitForm input').each(function() {
+			    		if($(this).attr('name') === deleteName)
 			    			$(this).remove();
 			    	});
 			    });
 		    });
 
+		    $('.attribute').click(function() {
+		    	$parent = $(this).parent();
+		    	if ($parent.attr('addThings') === undefined) {
+		    		$parent.attr('addThings', $(this).val());
+		    	}
+		    	else
+		    		$parent.removeAttr('addThings');
+
+		    });
+
 		    $('#button').on('mousedown', function() {
 		    	$(this).css('background-color', '#fff');
+		    	$('#submitForm').submit();
+		    	alert('表單已送出');
 		    });
 		    $('#button').on('mouseup', function() {
 		    	$(this).css('background-color', '#8ebebc');
